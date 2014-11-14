@@ -1,0 +1,20 @@
+# Eclipse CDT
+.cproject
+.projcet
+
+# Emulator and ROMS
+*.gba
+*.sav
+*.sgm
+
+# Patchs
+*.ips
+*.ups
+
+# Build
+Debug
+Release
+
+# C
+*.o
+*.out
