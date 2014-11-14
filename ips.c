@@ -11,6 +11,7 @@ static const char ips_magic_end[] = { 'E', 'O', 'F' };
 
 int ipsApply(FILE *base, FILE *patch, uint8_t **output) {
 	uint8_t *patchBufStart = NULL, *patchBuf, *romBuf;
+
 	size_t patchSize = 0, i = 0, romSize = 0;
 	uint32_t offset;
 	uint16_t size;

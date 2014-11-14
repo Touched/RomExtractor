@@ -1,6 +1,8 @@
 # Eclipse CDT
 .cproject
 .project
+idea
+.settings
 
 # Emulator and ROMS
 *.gba
