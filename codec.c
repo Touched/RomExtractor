@@ -1,9 +1,13 @@
 #include <stdint.h>
+#include <stdlib.h>
 
-int deindex_4bpp(uint8_t *data, int length, uint32_t *palette, uint32_t *output) {
+int deindex_4bpp(uint8_t *data, int length, uint32_t *palette, uint32_t **out) {
     int i;
     uint32_t pixel, pixel2;
     uint8_t index, index2;
+
+    uint32_t *output = (uint32_t *) malloc(length * 2 * sizeof(uint32_t));
+    *out = output;
 
     for (i = 0; i < length; ++i) {
         /* Read both pixels in this byte, and get the appropriate colour from
@@ -14,20 +18,23 @@ int deindex_4bpp(uint8_t *data, int length, uint32_t *palette, uint32_t *output)
         pixel2 = palette[index2];
 
         /* Pack the first pixel into the output */
-        *output = (pixel & 0xFFFFFF) | 0xFF000000;
+        *output = (pixel & 0xFFFFFFFF);// | 0xFF000000;
         output++;
 
         /* Pack the second pixel into the output */
-        *output = (pixel2 & 0xFFFFFF) | 0xFF000000;
+        *output = (pixel2 & 0xFFFFFFFF);// | 0xFF000000;
         output++;
     }
 
-    return 0;
+    return length * 2;
 }
 
-int detile(uint32_t *tiles, int length, int width, uint32_t *output) {
+int detile(uint32_t *tiles, int length, int width, uint32_t **out) {
     int i, x = 0, y = 0, j = 0, k = 0;
     int tile, pixel;
+
+    uint32_t *output = (uint32_t *) malloc(length * sizeof(uint32_t));
+    *out = output;
 
     for (i = 0; i < length; ++i) {
         tile = i / 64;
